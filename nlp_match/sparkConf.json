@@ -1,0 +1,25 @@
+{
+ "Spark": {
+   "appName": "BomSpreadByEffective-GYGS",
+   "spark.network.timeout": "300",
+   "spark.sql.shuffle.partitions": "288",
+   "spark.default.parallelism": "288",
+   "spark.executor.memory": "200G",
+   "spark.executor.cores":"32"
+ },
+ "Read": {
+    "url": "jdbc:sqlserver://10.2.8.172:1433;DatabaseName=GreeSellInfor",
+    "driver":"com.microsoft.sqlserver.jdbc.SQLServerDriver",
+    "user":"psdwop",
+    "password":"ps999999",
+    "useSSL":"false",
+    "JDBCOptions.JDBC_BATCH_INSERT_SIZE":"150",
+	"fetchsize":"10000"
+  },
+ "ReadSql": {    
+    "MasterID": "(SELECT top 10 GrowKey FROM dbo.Fact_WXSYWDSC_PGXT_Master) MasterID",
+	"CauseTable": "(SELECT GrowKey,XXYYGUID,故障描述 FROM dbo.Fact_WXSYWDSC_PGXT_Cause) CauseTable",
+	"PartTable": "(SELECT GrowKey,WXJSMXGUID,旧配件名称 FROM dbo.Fact_WXSYWDSC_PGXT_Part) PartTable",
+	"MatterTable": "(SELECT GrowKey,WXXMGUID,描述 FROM dbo.Fact_WXSYWDSC_PGXT_Matter) MatterTable"
+  }
+}

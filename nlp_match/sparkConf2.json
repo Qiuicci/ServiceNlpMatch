@@ -1,0 +1,33 @@
+{
+ "Spark": {
+   "appName": "BomSpreadByEffective-GYGS-400",
+   "spark.network.timeout": "300",
+   "spark.sql.shuffle.partitions": "288",
+   "spark.default.parallelism": "288",
+   "spark.executor.memory": "200G",
+   "spark.executor.cores":"32"
+ },
+  "Write":{
+    "url": "jdbc:sqlserver://10.2.8.178:1433;DatabaseName=GreeBGDW",
+    "driver":"com.microsoft.sqlserver.jdbc.SQLServerDriver",
+    "user":"bgop",
+    "password":"bg@999999",
+    "useSSL":"false",
+    "JDBCOptions.JDBC_BATCH_INSERT_SIZE":"150",
+    "truncate":"true",
+    "dbtable": "Fact_MaterielBom_400"
+  },
+  "Read": {
+    "url": "jdbc:sqlserver://10.2.8.178:1433;DatabaseName=GreeDW",
+    "driver":"com.microsoft.sqlserver.jdbc.SQLServerDriver",
+    "user":"biop",
+    "password":"123qaz",
+    "useSSL":"false",
+    "JDBCOptions.JDBC_BATCH_INSERT_SIZE":"150",
+	"fetchsize":"10000"
+  },
+  "ReadSql": {    
+    "BaseMateriel": "(SELECT TOP 10 ERPID,CheckedMaterielCode,Levels,CheckedTime   FROM View_MaterielBom_Product_Materiel_Spark   where ERPID=980)  BaseMateriel",
+    "BOM_All": "(SELECT  ERPID_BOM,ManufacturingCode_BOM,NetQuantity_BOM,ManufacturingCode_BOM_ID,MaterielCode_BOM_ID,SFGQ_BOM  FROM View_MaterielBom_Spark_400 ) BOM"
+  }
+}

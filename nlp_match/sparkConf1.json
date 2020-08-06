@@ -1,0 +1,22 @@
+{
+ "Spark": {
+   "appName": "BomSpreadByEffective-GYGS",
+   "spark.network.timeout": "300",
+   "spark.sql.shuffle.partitions": "288",
+   "spark.default.parallelism": "288",
+   "spark.executor.memory": "200G",
+   "spark.executor.cores":"32"
+ },
+ "Read": {
+    "url": "jdbc:sqlserver://10.2.8.172:1433;DatabaseName=GreeSellInfor",
+    "driver":"com.microsoft.sqlserver.jdbc.SQLServerDriver",
+    "user":"psdwop",
+    "password":"ps999999",
+    "useSSL":"false",
+    "JDBCOptions.JDBC_BATCH_INSERT_SIZE":"150",
+	"fetchsize":"10000"
+  },
+ "ReadSql": {    
+    "WX_context": "(select top 100 GrowKey,isnull(stuff((SELECT '++++' + 故障描述 FROM dbo.Fact_WXSYWDSC_PGXT_Cause WHERE GrowKey = T.GrowKey FOR XML PATH('')), 1, 1, ''),'')+ isnull(stuff((SELECT '++++' + 旧配件名称 FROM dbo.Fact_WXSYWDSC_PGXT_Part WHERE GrowKey = T.GrowKey FOR XML PATH('')), 1, 1, ''),'')+ isnull(stuff((SELECT '++++' + 描述 FROM dbo.Fact_WXSYWDSC_PGXT_Matter WHERE GrowKey = T.GrowKey FOR XML PATH('')), 1, 1, ''),'') AS context from dbo.Fact_WXSYWDSC_PGXT_Master as T) WX_context"
+  }
+}

@@ -1,0 +1,33 @@
+{
+ "Spark": {
+   "appName": "BomSpreadByEffective",
+   "spark.network.timeout": "300",
+   "spark.sql.shuffle.partitions": "288",
+   "spark.default.parallelism": "288",
+   "spark.executor.memory": "200G",
+   "spark.executor.cores":"32"
+ },
+  "Write":{
+    "url": "jdbc:sqlserver://10.2.10.36:1433;DatabaseName=KYJHRGREE",
+    "driver":"com.microsoft.sqlserver.jdbc.SQLServerDriver",
+    "user":"AttReport_User4",
+    "password":"3399$JjKk",
+    "useSSL":"false",
+    "JDBCOptions.JDBC_BATCH_INSERT_SIZE":"150",
+    "truncate":"true",
+    "dbtable": "Fact_MaterielBom_400"
+  },
+  "Read": {
+    "url": "jdbc:sqlserver://10.2.10.36:1433;DatabaseName=KYJHRGREE",
+    "driver":"com.microsoft.sqlserver.jdbc.SQLServerDriver",
+    "user":"AttReport_User4",
+    "password":"3399$JjKk",
+    "useSSL":"false",
+    "JDBCOptions.JDBC_BATCH_INSERT_SIZE":"150",
+	"fetchsize":"10000"
+  },
+  "ReadSql": {    
+    "BaseMateriel": "(SELECT TOP 10 SysFlg,EMPNUM,RSIdeId FROM dbo.Employee) BaseMateriel"
+	"BOM_All": "(SELECT EMPNUM,RSIdeId FROM dbo.Employee) BOM"
+  }
+}
